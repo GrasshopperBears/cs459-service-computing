@@ -1,5 +1,4 @@
 const express = require("express");
-const http = require("http");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
@@ -11,7 +10,9 @@ app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 
-// app.use("/auth", require("./src/route/auth"));
+app.use(require("./routes/auth"));
+app.use(require("./routes/log"));
+app.use(require("./routes/delivery"));
 
 app.listen(PORT, () => {
   console.log(`Express server running at port ${PORT}`);
