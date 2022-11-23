@@ -6,6 +6,7 @@ const deliverySchema = Schema({
   to: { type: Schema.Types.ObjectId, ref: "User", required: true },
   deliveredBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   status: { type: String, default: "deliverStart" },
+  realDeliveryId: { type: String, required: true },
 });
 
 module.exports = deliverySchema;
