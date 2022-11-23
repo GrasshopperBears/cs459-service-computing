@@ -10,19 +10,21 @@ const connectOption = {
   useUnifiedTopology: true,
 };
 
-database.on("error", console.error.bind(console, "mongoose connection error."));
-
-database.on("open", () => {
-  logger.info("데이터베이스와 연결되었습니다.");
+database.on("error", () => {
+  console.error("mongoose connection error.");
 });
 
-database.on("error", function (err) {
-  logger.error("데이터베이스 연결 에러 발생: " + err);
+database.on("open", () => {
+  console.log("데이터베이스와 연결되었습니다.");
+});
+
+database.on("error", (err) => {
+  console.error("데이터베이스 연결 에러 발생: " + err);
   mongoose.disconnect();
 });
 
-database.on("disconnected", function () {
-  logger.error("데이터베이스와 연결이 끊어졌습니다.");
+database.on("disconnected", () => {
+  console.error("데이터베이스와 연결이 끊어졌습니다.");
   setTimeout(() => {
     mongoose.connect(process.env.DB_PATH, connectOption);
   }, 5000);
