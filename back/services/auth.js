@@ -14,7 +14,16 @@ const signup = async (req, res) => {
   }
 };
 
-const login = (req, res) => {};
+const login = async (req, res) => {
+  const { id, password } = req.body;
+  try {
+    const user = await userModel.findOne({ id, password });
+    res.cookie("userId", user._id.toString(), { httpOnly: true });
+    res.sendStatus(200);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
 
 const logout = (req, res) => {};
 
