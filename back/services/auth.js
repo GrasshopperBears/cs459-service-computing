@@ -25,6 +25,9 @@ const login = async (req, res) => {
   }
 };
 
-const logout = (req, res) => {};
+const logout = (_, res) => {
+  res.clearCookie("userId");
+  res.sendStatus(200);
+};
 
 module.exports = { signup, login, logout };
