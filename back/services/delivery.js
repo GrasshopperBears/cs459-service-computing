@@ -1,5 +1,21 @@
 const { deliveryModel, userModel } = require("../models");
 
+const getDeliveries = async (req, res) => {
+  try {
+    const deliveries = await deliveryModel.find({}, [
+      "from",
+      "to",
+      "commodity",
+      "deliveredBy",
+      "status",
+      "realDeliveryId",
+    ]);
+    res.json(deliveries);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
+
 const createDelivery = async (req, res) => {
   const { from, to, commodity } = req.body;
   if (!from || !to || !commodity) return res.sendStatus(400);
@@ -50,4 +66,9 @@ const completeDelivery = async (req, res) => {
   }
 };
 
-module.exports = { createDelivery, assignDelivery, completeDelivery };
+module.exports = {
+  getDeliveries,
+  createDelivery,
+  assignDelivery,
+  completeDelivery,
+};
