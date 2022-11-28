@@ -11,7 +11,13 @@ const createNotifiaction = async (type, description) => {
 
 const getNotifications = async (req, res) => {
   try {
-    const notifications = await notificationModel.find({});
+    const notifications = await notificationModel.find(
+      {},
+      ["type", "description", "createdAt"],
+      {
+        sort: { createdAt: -1 },
+      }
+    );
     res.json(notifications);
   } catch (e) {
     res.status(500).json(e);
