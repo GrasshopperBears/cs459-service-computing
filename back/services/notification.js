@@ -1,5 +1,14 @@
 const { notificationModel } = require("../models");
 
+const createNotifiaction = async (type, description) => {
+  try {
+    await notificationModel.create({ type, description });
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
 const getNotifications = async (req, res) => {
   try {
     const notifications = await notificationModel.find({});
@@ -9,4 +18,4 @@ const getNotifications = async (req, res) => {
   }
 };
 
-module.exports = { getNotifications };
+module.exports = { createNotifiaction, getNotifications };
