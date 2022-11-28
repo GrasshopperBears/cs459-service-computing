@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const userModel = require("./user");
 const logModel = require("./log");
 const deliveryModel = require("./delivery");
+const notificationModel = require("./notification");
 
 const database = mongoose.connection;
 const connectOption = {
@@ -36,4 +37,5 @@ module.exports = {
   userModel: mongoose.model("User", userModel),
   logModel: mongoose.model("Log", logModel),
   deliveryModel: mongoose.model("Delivery", deliveryModel),
+  notificationModel: mongoose.model("Notification", notificationModel),
 };
