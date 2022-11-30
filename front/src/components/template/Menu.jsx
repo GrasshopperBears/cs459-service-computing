@@ -1,5 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as Close } from "../../static/Close.svg";
+
+const MenuItem = ({ title }) => {
+  const [isHover, setHover] = useState(false);
+  const getTitle = () => {
+    if (title === "delivery") return "Delivery Man";
+    return title.charAt(0).toUpperCase() + title.slice(1);
+  };
+  const selected = useLocation().pathname.includes(title);
+  return (
+    <div
+      style={{
+        padding: "0 24px",
+        boxSizing: "border-box",
+      }}
+    >
+      <div
+        style={{
+          padding: "11px 0",
+          borderBottom: "1px solid var(--border-dark)",
+        }}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <div
+          style={{
+            fontSize: 14,
+            fontWeight: 500,
+            color: selected
+              ? "var(--blue-dark)"
+              : isHover
+              ? "var(--white)"
+              : "var(--white-80)",
+            transition: "color 0.15s",
+          }}
+        >
+          {getTitle()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const pathList = ["buyer", "seller", "company", "delivery"];
 
 const Menu = ({ isMenuOpen, setIsMenuOpen }) => {
   return (
@@ -35,6 +79,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }) => {
             alignItems: "center",
             columnGap: 20,
             borderBottom: "1px solid var(--border-dark)",
+            marginBottom: 4,
           }}
         >
           <Close
@@ -53,6 +98,11 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }) => {
             mv=p
           </div>
         </div>
+        {pathList.map((path) => (
+          <Link to={`${path}`} onClick={() => setIsMenuOpen(false)}>
+            <MenuItem title={path} />
+          </Link>
+        ))}
       </div>
     </>
   );
