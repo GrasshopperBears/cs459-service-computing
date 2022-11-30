@@ -6,4 +6,6 @@ body {
   --text-gray: #6e6e73;
   --text: #1d1d1f;
   --blue: #0077ed;
+
+  color: var(--text);
 }

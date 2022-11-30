@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import "./App.css";
 import Container from "./components/template/Container";
 
@@ -12,7 +17,7 @@ function App() {
     <Router>
       <Container>
         <Routes>
-          <Route path="/" element={<BuyerScreen />} />
+          <Route path="*" element={<Navigate to="/buyer" replace />} />
           <Route path="/buyer" element={<BuyerScreen />} />
           <Route path="/seller" element={<SellerScreen />} />
           <Route path="/company" element={<CompanyScreen />} />
