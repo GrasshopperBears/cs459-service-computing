@@ -5,7 +5,7 @@ import { ReactComponent as Menu } from "../../static/Menu.svg";
 const Header = ({ setIsMenuOpen }) => {
   const path = useLocation().pathname.replace("/", "");
   const getTitle = () => {
-    if (path === "/delivery") return "Delivery Man";
+    if (path === "delivery") return "Delivery Man";
     return path.charAt(0).toUpperCase() + path.slice(1);
   };
   return (
