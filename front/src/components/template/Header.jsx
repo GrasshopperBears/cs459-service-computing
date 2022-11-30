@@ -24,18 +24,19 @@ const Header = ({ setIsMenuOpen }) => {
           width: "100%",
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
           backgroundColor: "rgba(0, 0, 0, 0.8)",
           columnGap: 20,
         }}
       >
         <Menu
-          style={{ cursor: "pointer", marginLeft: 20 }}
+          style={{ cursor: "pointer", position: "absolute", top: 20, left: 20 }}
           onClick={() => setIsMenuOpen(true)}
         />
         <div
           style={{
             color: "var(--white-80)",
-            fontWeight: "800",
+            fontWeight: "900",
             fontStyle: "italic",
             fontSize: 24,
             marginBottom: 5,
