@@ -23,7 +23,7 @@ const messages = [
 const BuyerScreen = () => {
   return (
     <>
-      <Title title="Check you parcels" />
+      <Title title="Check you Parcels" />
       <ParcelList parcels={parcels} />
       <Title title="Notifications" />
       <Notification messages={messages} />
