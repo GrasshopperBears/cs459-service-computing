@@ -17,7 +17,7 @@ const ParcelList = ({ parcels }) => {
           }}
         >
           <div style={{ flex: "1", fontSize: 16, fontWeight: 600 }}>
-            {parcel.item}
+            {parcel.commodity}
           </div>
           <div style={{ flex: "1", fontSize: 12, color: "var(--text-gray)" }}>
             {parcel.date} <br />
