@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import Title from "../components/Title";
 import DetailInfo from "../components/DetailInfo";
+import DetailStatus from "../components/DetailStatus";
 
 const messages = [
   { location: "강남", status: "잡화처리" },
@@ -33,32 +34,7 @@ const DetailScreen = () => {
     <>
       <Title title="Parcel Details" />
       <DetailInfo parcel={parcel} />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "var(--background-gray)",
-          padding: "0 16px",
-          borderRadius: 12,
-        }}
-      >
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            style={{
-              padding: "16px 0",
-              borderTop: index ? "1px solid var(--border)" : undefined,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <div style={{ fontSize: 14 }}>{message.location}</div>
-            <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
-              {message.status}
-            </div>
-          </div>
-        ))}
-      </div>
+      <DetailStatus messages={messages} />
     </>
   );
 };
