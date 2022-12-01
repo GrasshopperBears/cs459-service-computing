@@ -10,7 +10,7 @@ const Container = ({ children }) => {
       <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <div
         style={{
-          padding: "0 20px",
+          padding: "0 20px 24px",
           boxSizing: "border-box",
           width: "min(430px, 100%)",
           margin: "auto",
