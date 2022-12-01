@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as Menu } from "../../static/Menu.svg";
 import { ReactComponent as Back } from "../../static/Back.svg";
 
-const Header = ({ setIsMenuOpen }) => {
+const Header = ({ setMenuOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname.split("/")[1];
@@ -34,7 +34,7 @@ const Header = ({ setIsMenuOpen }) => {
       >
         <Menu
           style={{ cursor: "pointer", position: "absolute", top: 20, left: 20 }}
-          onClick={() => setIsMenuOpen(true)}
+          onClick={() => setMenuOpen(true)}
         />
         <div
           style={{

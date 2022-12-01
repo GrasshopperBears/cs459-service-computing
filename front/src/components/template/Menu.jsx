@@ -5,7 +5,7 @@ import MenuItem from "./MenuItem";
 
 const pathList = ["buyer", "seller", "company", "delivery"];
 
-const Menu = ({ isMenuOpen, setIsMenuOpen }) => {
+const Menu = ({ isMenuOpen, setMenuOpen }) => {
   return (
     <>
       <div
@@ -19,7 +19,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }) => {
           pointerEvents: isMenuOpen ? "all" : "none",
           transition: "opacity 0.25s ease-out",
         }}
-        onClick={() => setIsMenuOpen(false)}
+        onClick={() => setMenuOpen(false)}
       />
       <div
         style={{
@@ -44,7 +44,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }) => {
         >
           <Close
             style={{ cursor: "pointer", marginLeft: 20 }}
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => setMenuOpen(false)}
           />
           <div
             style={{
@@ -59,7 +59,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }) => {
           </div>
         </div>
         {pathList.map((path) => (
-          <Link key={path} to={`${path}`} onClick={() => setIsMenuOpen(false)}>
+          <Link key={path} to={`${path}`} onClick={() => setMenuOpen(false)}>
             <MenuItem title={path} />
           </Link>
         ))}
