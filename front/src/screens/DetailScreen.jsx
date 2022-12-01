@@ -29,7 +29,7 @@ const DetailScreen = () => {
       );
     };
     fetchParcel();
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
