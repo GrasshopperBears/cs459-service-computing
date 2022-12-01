@@ -11,6 +11,7 @@ import BuyerScreen from "./screens/BuyerScreen";
 import SellerScreen from "./screens/SellerScreen";
 import CompanyScreen from "./screens/CompanyScreen";
 import DeliveryScreen from "./screens/DeliveryScreen";
+import DetailScreen from "./screens/DetailScreen";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="*" element={<Navigate to="/buyer" replace />} />
           <Route path="/buyer" element={<BuyerScreen />} />
           <Route path="/seller" element={<SellerScreen />} />
+          <Route path="/buyer/:commodity" element={<DetailScreen />} />
+          <Route path="/seller/:commodity" element={<DetailScreen />} />
           <Route path="/company" element={<CompanyScreen />} />
           <Route path="/delivery" element={<DeliveryScreen />} />
         </Routes>
