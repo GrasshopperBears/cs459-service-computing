@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Request = () => {
   const [requestInfo, setRequestInfo] = useState({
-    Product: "",
+    Commodity: "",
     Additional_Info: "",
     Depart: "",
     Arrive: "",
@@ -47,7 +47,7 @@ const Request = () => {
         }}
         onClick={() =>
           setRequestInfo({
-            Product: "",
+            Commodity: "",
             Additional_Info: "",
             Depart: "",
             Arrive: "",
