@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Request = () => {
   const [requestInfo, setRequestInfo] = useState({
@@ -45,14 +46,23 @@ const Request = () => {
           textAlign: "center",
           cursor: infoEntered ? "not-allowed" : "pointer",
         }}
-        onClick={() =>
-          setRequestInfo({
-            Commodity: "",
-            Additional_Info: "",
-            Depart: "",
-            Arrive: "",
-          })
-        }
+        onClick={async () => {
+          if (!infoEntered) {
+            const response = await axios.post("http://localhost:4000/create", {
+              from: requestInfo.Depart,
+              to: requestInfo.Arrive,
+              commodity: requestInfo.Commodity,
+              additionalInfo: requestInfo.Additional_Info,
+            });
+            console.log(response);
+            setRequestInfo({
+              Commodity: "",
+              Additional_Info: "",
+              Depart: "",
+              Arrive: "",
+            });
+          }
+        }}
       >
         Request the Parcel
       </div>
