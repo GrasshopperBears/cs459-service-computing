@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import Title from "../components/Title";
 import DetailInfo from "../components/DetailInfo";
 import DetailStatus from "../components/DetailStatus";
+import DetailLocation from "../components/DetailLocation";
 
 const messages = [
   { location: "강남", status: "잡화처리" },
@@ -35,6 +36,7 @@ const DetailScreen = () => {
       <Title title="Parcel Details" />
       <DetailInfo parcel={parcel} />
       <DetailStatus messages={messages} />
+      <DetailLocation />
     </>
   );
 };

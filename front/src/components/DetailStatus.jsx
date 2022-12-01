@@ -9,6 +9,7 @@ const DetailInfo = ({ messages }) => {
         backgroundColor: "var(--background-gray)",
         padding: "0 16px",
         borderRadius: 12,
+        marginBottom: 16,
       }}
     >
       {messages.map((message, index) => (
