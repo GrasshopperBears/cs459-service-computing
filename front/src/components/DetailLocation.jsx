@@ -1,22 +1,15 @@
-/* global kakao */
 import React, { useEffect } from "react";
 
 const DetailInfo = () => {
   useEffect(() => {
     const container = document.getElementById("map");
     const options = {
-      center: new window.kakao.maps.LatLng(
-        36.37044735570486,
-        127.36125353867513
-      ),
+      center: new window.kakao.maps.LatLng(36.370447, 127.361253),
       level: 6,
     };
     const map = new window.kakao.maps.Map(container, options);
-    const markerPosition = new kakao.maps.LatLng(
-      36.37044735570486,
-      127.36125353867513
-    );
-    const marker = new kakao.maps.Marker({
+    const markerPosition = new window.kakao.maps.LatLng(36.370447, 127.361253);
+    const marker = new window.kakao.maps.Marker({
       position: markerPosition,
     });
     marker.setMap(map);
