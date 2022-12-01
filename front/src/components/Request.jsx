@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const Request = () => {
+const Request = ({ setParcels }) => {
   const [requestInfo, setRequestInfo] = useState({
     Commodity: "",
     Additional_Info: "",
@@ -48,13 +48,15 @@ const Request = () => {
         }}
         onClick={async () => {
           if (!infoEntered) {
-            const response = await axios.post("http://localhost:4000/create", {
+            await axios.post("http://localhost:4000/create", {
               from: requestInfo.Depart,
               to: requestInfo.Arrive,
+              date: new Date().toISOString().split("T")[0].replace(/-/g, "/"),
               commodity: requestInfo.Commodity,
               additionalInfo: requestInfo.Additional_Info,
             });
-            console.log(response);
+            const { data } = await axios.get("http://localhost:4000/delivery");
+            setParcels(data);
             setRequestInfo({
               Commodity: "",
               Additional_Info: "",

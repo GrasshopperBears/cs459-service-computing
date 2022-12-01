@@ -20,7 +20,7 @@ const SellerScreen = () => {
       <Title title="Check you Parcels" />
       <ParcelList parcels={parcels} />
       <Title title="Make a Request" />
-      <Request />
+      <Request setParcels={setParcels} />
     </>
   );
 };
