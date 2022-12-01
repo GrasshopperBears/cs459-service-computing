@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import Title from "../components/Title";
 import ParcelList from "../components/ParcelList";
@@ -21,10 +22,18 @@ const messages = [
 ];
 
 const BuyerScreen = () => {
+  const [parcels, setParcels] = useState(parcelsMock);
+  useEffect(() => {
+    const fetchParcels = async () => {
+      const { data } = await axios.get("http://localhost:4000/delivery");
+      setParcels(data);
+    };
+    fetchParcels();
+  }, []);
   return (
     <>
       <Title title="Check you Parcels" />
-      <ParcelList parcels={parcelsMock} />
+      <ParcelList parcels={parcels} />
       <Title title="Notifications" />
       <Notification messages={messages} />
     </>

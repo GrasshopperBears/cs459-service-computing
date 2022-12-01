@@ -73,7 +73,7 @@ const Header = ({ setIsMenuOpen }) => {
           {location.pathname.split("/").length > 2 && (
             <Back
               onClick={() => navigate(-1)}
-              style={{ cursor: "pointer", margin: "0 8px 0 -4px" }}
+              style={{ cursor: "pointer", margin: "1px 8px 0 -4px" }}
             />
           )}
           {getTitle()}
