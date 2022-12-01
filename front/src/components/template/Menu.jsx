@@ -59,7 +59,7 @@ const Menu = ({ isMenuOpen, setIsMenuOpen }) => {
           </div>
         </div>
         {pathList.map((path) => (
-          <Link to={`${path}`} onClick={() => setIsMenuOpen(false)}>
+          <Link key={path} to={`${path}`} onClick={() => setIsMenuOpen(false)}>
             <MenuItem title={path} />
           </Link>
         ))}

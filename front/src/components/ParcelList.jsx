@@ -5,6 +5,7 @@ const ParcelList = ({ parcels }) => {
     <div style={{ display: "grid", rowGap: 12 }}>
       {parcels.map((parcel) => (
         <div
+          key={parcel.item}
           style={{
             display: "flex",
             alignItems: "center",
@@ -16,7 +17,7 @@ const ParcelList = ({ parcels }) => {
           }}
         >
           <div style={{ flex: "1", fontSize: 16, fontWeight: 600 }}>
-            {parcel.item}
+            {parcel.commodity}
           </div>
           <div style={{ flex: "1", fontSize: 12, color: "var(--text-gray)" }}>
             {parcel.date} <br />

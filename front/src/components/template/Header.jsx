@@ -53,6 +53,7 @@ const Header = ({ setIsMenuOpen }) => {
           borderBottom: "1px solid var(--border)",
           display: "flex",
           justifyContent: "center",
+          backgroundColor: "var(--white)",
         }}
       >
         <div

@@ -15,3 +15,11 @@ body {
 a {
   text-decoration: none;
 }
+
+input {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: none;
+}

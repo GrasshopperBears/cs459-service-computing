@@ -5,7 +5,9 @@ const getDeliveries = async (req, res) => {
     const deliveries = await deliveryModel.find({}, [
       "from",
       "to",
+      "date",
       "commodity",
+      "additionalInfo",
       "deliveredBy",
       "status",
       "realDeliveryId",
@@ -17,12 +19,13 @@ const getDeliveries = async (req, res) => {
 };
 
 const createDelivery = async (req, res) => {
-  const { from, to, commodity } = req.body;
-  if (!from || !to || !commodity) return res.sendStatus(400);
+  const { from, to, date, commodity, additionalInfo } = req.body;
+  if (!from || !to || !date || !commodity || !additionalInfo)
+    return res.sendStatus(400);
 
   try {
     // TODO: 랜덤으로 realDeliveryId 배정 후 추가
-    await deliveryModel.create({ from, to, commodity });
+    await deliveryModel.create({ from, to, date, commodity, additionalInfo });
     res.sendStatus(200);
   } catch (e) {
     res.status(500).json(e);
