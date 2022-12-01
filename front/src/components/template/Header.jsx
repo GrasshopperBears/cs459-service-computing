@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { ReactComponent as Menu } from "../../static/Menu.svg";
 
 const Header = ({ setIsMenuOpen }) => {
-  const path = useLocation().pathname.replace("/", "");
+  const path = useLocation().pathname.split("/")[1];
   const getTitle = () => {
     if (path === "delivery") return "Delivery Man";
     return path.charAt(0).toUpperCase() + path.slice(1);
