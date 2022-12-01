@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 import Title from "../components/Title";
+import DetailInfo from "../components/DetailInfo";
 
 const messages = [
   { location: "강남", status: "잡화처리" },
@@ -31,59 +32,7 @@ const DetailScreen = () => {
   return (
     <>
       <Title title="Parcel Details" />
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          borderRadius: 12,
-          border: "1px solid var(--border)",
-          padding: "14px 16px",
-          gap: 14,
-          flexWrap: "wrap",
-          marginBottom: 16,
-        }}
-      >
-        <div
-          style={{
-            flex: "1 1 calc(50% - 7px)",
-            fontSize: 16,
-            fontWeight: 600,
-          }}
-        >
-          {parcel.commodity}
-        </div>
-        <div
-          style={{
-            flex: "1 1 calc(50% - 7px)",
-            fontSize: 12,
-            color: "var(--text-gray)",
-            textAlign: "right",
-          }}
-        >
-          From : {parcel.from}
-          <br />
-          To : {parcel.to}
-        </div>
-        <div
-          style={{
-            flex: "1 1 calc(50% - 7px)",
-            fontSize: 12,
-            color: "var(--text-gray)",
-          }}
-        >
-          Requested : {parcel.date}
-        </div>
-        <div
-          style={{
-            flex: "1 1 calc(50% - 7px)",
-            fontSize: 12,
-            color: "var(--text-gray)",
-            textAlign: "right",
-          }}
-        >
-          {parcel.additionalInfo}
-        </div>
-      </div>
+      <DetailInfo parcel={parcel} />
       <div
         style={{
           display: "flex",
