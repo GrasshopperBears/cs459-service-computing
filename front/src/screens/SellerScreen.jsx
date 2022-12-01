@@ -4,10 +4,10 @@ import axios from "axios";
 import Title from "../components/Title";
 import ParcelList from "../components/ParcelList";
 import Request from "../components/Request";
-import { parcelsMock } from "./BuyerScreen";
+import parcelsMock from "../static/parcelsMock";
 
 const SellerScreen = () => {
-  const [parcels, setParcels] = useState(parcelsMock);
+  const [parcels, setParcels] = useState([parcelsMock]);
   useEffect(() => {
     const fetchParcels = async () => {
       const { data } = await axios.get("http://localhost:4000/delivery");
