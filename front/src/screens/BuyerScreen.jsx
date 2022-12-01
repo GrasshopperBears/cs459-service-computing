@@ -4,16 +4,7 @@ import axios from "axios";
 import Title from "../components/Title";
 import ParcelList from "../components/ParcelList";
 import Notification from "../components/Notification";
-
-export const parcelsMock = [
-  { commodity: "Hoodie", date: "2022/11/14", status: "Delivery Complete." },
-  {
-    commodity: "Phone Case",
-    date: "2022/11/20",
-    status: "Departed from 경기 부천.",
-  },
-  { commodity: "Water", date: "2022/11/21", status: "Arrived at 유성." },
-];
+import parcelsMock from "../static/parcelsMock";
 
 const messages = [
   "'Water' has departed from 전라남도 목포",
