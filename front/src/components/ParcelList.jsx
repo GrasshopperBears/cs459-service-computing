@@ -5,6 +5,7 @@ const ParcelList = ({ parcels }) => {
     <div style={{ display: "grid", rowGap: 12 }}>
       {parcels.map((parcel) => (
         <div
+          key={parcel.item}
           style={{
             display: "flex",
             alignItems: "center",
