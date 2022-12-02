@@ -3,6 +3,8 @@ import { ReactComponent as Arrow } from "../static/Arrow.svg";
 
 const DeliveryItem = ({ parcel }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isStarted, setStarted] = useState(false);
+  const isCompleted = parcel.status.includes("Complete");
   return (
     <div
       style={{
@@ -38,14 +40,21 @@ const DeliveryItem = ({ parcel }) => {
           style={{
             borderRadius: 15,
             padding: "3.5px 11px 4.5px",
-            backgroundColor: "var(--blue)",
-            cursor: "pointer",
+            backgroundColor: isCompleted ? "var(--text-gray)" : "var(--blue)",
+            cursor: isCompleted ? "not-allowed" : "pointer",
             fontSize: 12,
             color: "var(--white)",
             fontWeight: 600,
           }}
+          onClick={() => {
+            if (!isCompleted) setStarted(!isStarted);
+          }}
         >
-          Complete
+          {parcel.status.includes("Complete")
+            ? "Completed"
+            : isStarted
+            ? "Complete"
+            : "Start"}
         </div>
         <Arrow
           onClick={() => setIsExpanded(!isExpanded)}
