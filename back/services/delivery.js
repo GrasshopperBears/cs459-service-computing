@@ -1,8 +1,10 @@
 const { deliveryModel, userModel } = require("../models");
 
 const getDeliveries = async (req, res) => {
+  const { deliveryMan } = req.body;
+
   try {
-    const deliveries = await deliveryModel.find({}, [
+    const deliveries = await deliveryModel.find({ deliveredBy: deliveryMan }, [
       "from",
       "to",
       "date",
