@@ -18,6 +18,7 @@ const Menu = ({ isMenuOpen, setMenuOpen }) => {
           opacity: isMenuOpen ? 1 : 0,
           pointerEvents: isMenuOpen ? "all" : "none",
           transition: "opacity 0.25s ease-out",
+          zIndex: 10,
         }}
         onClick={() => setMenuOpen(false)}
       />
@@ -30,6 +31,7 @@ const Menu = ({ isMenuOpen, setMenuOpen }) => {
           top: 0,
           left: isMenuOpen ? 0 : -256,
           transition: "left 0.25s ease-out",
+          zIndex: 15,
         }}
       >
         <div

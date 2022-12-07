@@ -50,11 +50,7 @@ const DeliveryItem = ({ parcel }) => {
             if (!isCompleted) setStarted(!isStarted);
           }}
         >
-          {parcel.status.includes("Complete")
-            ? "Completed"
-            : isStarted
-            ? "Complete"
-            : "Start"}
+          {isCompleted ? "Completed" : isStarted ? "Complete" : "Start"}
         </div>
         <Arrow
           onClick={() => setIsExpanded(!isExpanded)}

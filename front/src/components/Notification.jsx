@@ -13,6 +13,7 @@ const Notification = ({ messages }) => {
     >
       {messages.map((message, index) => (
         <div
+          key={index}
           style={{
             padding: "16px 0",
             fontSize: 14,
