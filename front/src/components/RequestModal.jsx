@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const drivers = ["김넙죽", "이거위", "박냐옹"];
+const drivers = ["김넙죽", "이거위", "박냐옹", "최오리", "정너굴", "강백로"];
 
 const DriverItem = ({ driver, setOpen }) => {
   const [isHover, setHover] = useState(false);
