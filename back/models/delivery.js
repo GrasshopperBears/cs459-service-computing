@@ -7,7 +7,7 @@ const deliverySchema = Schema({
   date: { type: String, requred: true },
   commodity: { type: String, required: true },
   additionalInfo: { type: String, required: true },
-  deliveredBy: { type: Schema.Types.ObjectId, ref: "User" },
+  deliveredBy: { type: String },
   status: { type: String, default: "deliverStart" },
   realDeliveryId: { type: String },
 });
