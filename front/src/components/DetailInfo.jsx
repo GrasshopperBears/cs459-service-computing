@@ -5,18 +5,18 @@ const DetailInfo = ({ parcel }) => {
     <div
       style={{
         display: "flex",
-        alignItems: "center",
+        alignItems: "baseline",
         borderRadius: 12,
         border: "1px solid var(--border)",
         padding: "14px 16px",
-        gap: 14,
+        gap: 12,
         flexWrap: "wrap",
         marginBottom: 16,
       }}
     >
       <div
         style={{
-          flex: "1 1 calc(50% - 7px)",
+          flex: "1 1 50%",
           fontSize: 16,
           fontWeight: 600,
         }}
@@ -25,10 +25,19 @@ const DetailInfo = ({ parcel }) => {
       </div>
       <div
         style={{
-          flex: "1 1 calc(50% - 7px)",
+          flex: "1 1 calc(50% - 12px)",
           fontSize: 12,
           color: "var(--text-gray)",
           textAlign: "right",
+        }}
+      >
+        Requested : {parcel.date}
+      </div>
+      <div
+        style={{
+          flex: "1 1 100%",
+          fontSize: 12,
+          color: "var(--text-gray)",
         }}
       >
         From : {parcel.from}
@@ -37,22 +46,12 @@ const DetailInfo = ({ parcel }) => {
       </div>
       <div
         style={{
-          flex: "1 1 calc(50% - 7px)",
+          flex: "1 1",
           fontSize: 12,
           color: "var(--text-gray)",
         }}
       >
-        Requested : {parcel.date}
-      </div>
-      <div
-        style={{
-          flex: "1 1 calc(50% - 7px)",
-          fontSize: 12,
-          color: "var(--text-gray)",
-          textAlign: "right",
-        }}
-      >
-        {parcel.additionalInfo}
+        Description : {parcel.additionalInfo}
       </div>
     </div>
   );

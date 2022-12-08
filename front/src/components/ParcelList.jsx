@@ -21,8 +21,8 @@ const ParcelList = ({ parcels }) => {
           No parcels found
         </div>
       ) : (
-        parcels.map((parcel) => (
-          <Link to={`/${path}/${parcel.commodity}`} key={parcel.commodity}>
+        parcels.map((parcel, index) => (
+          <Link to={`/${path}/${parcel.commodity}`} key={index}>
             <div
               style={{
                 display: "flex",
