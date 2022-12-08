@@ -16,7 +16,7 @@ const messages = [
 ];
 
 const DetailScreen = () => {
-  const [parcel, setParcel] = useState({});
+  const [parcel, setParcel] = useState(null);
   const location = useLocation();
   useEffect(() => {
     const fetchParcel = async () => {
@@ -36,7 +36,7 @@ const DetailScreen = () => {
       <Title title="Parcel Details" />
       <DetailInfo parcel={parcel} />
       <DetailStatus messages={messages} />
-      <DetailLocation />
+      <DetailLocation parcel={parcel} />
     </>
   );
 };
