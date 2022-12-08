@@ -35,46 +35,42 @@ const RequestItem = ({ location, parcels, setOpen, setSelectedParcel }) => {
         />
       </div>
       {isExpanded &&
-        parcels
-          .filter((parcel) => parcel.to === location)
-          .map((parcel, index) => (
+        parcels.map((parcel, index) => (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "10px 4px",
+              columnGap: 8,
+              borderTop: !index ? "1px solid var(--border)" : "none",
+            }}
+          >
+            <div style={{ fontSize: 14, fontWeight: 600 }}>
+              {parcel.commodity}
+            </div>
+            <div style={{ flex: "1", color: "var(--text-gray)", fontSize: 12 }}>
+              {parcel.from.split(" ").slice(0, 3).join(" ")}
+            </div>
             <div
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "10px 4px",
-                columnGap: 4,
-                borderTop: !index ? "1px solid var(--border)" : "none",
+                borderRadius: 15,
+                padding: "2.5px 10px 3.5px",
+                backgroundColor: "var(--blue)",
+                cursor: "pointer",
+                fontSize: 12,
+                color: "var(--white)",
+                fontWeight: 600,
+              }}
+              onClick={() => {
+                setSelectedParcel(parcel);
+                setOpen(true);
               }}
             >
-              <div style={{ fontSize: 14, fontWeight: 600 }}>
-                {parcel.commodity}
-              </div>
-              <div
-                style={{ flex: "1", color: "var(--text-gray)", fontSize: 12 }}
-              >
-                {parcel.from}
-              </div>
-              <div
-                style={{
-                  borderRadius: 15,
-                  padding: "2.5px 10px 3.5px",
-                  backgroundColor: "var(--blue)",
-                  cursor: "pointer",
-                  fontSize: 12,
-                  color: "var(--white)",
-                  fontWeight: 600,
-                }}
-                onClick={() => {
-                  setSelectedParcel(parcel);
-                  setOpen(true);
-                }}
-              >
-                Assign
-              </div>
+              Assign
             </div>
-          ))}
+          </div>
+        ))}
     </div>
   );
 };
@@ -82,7 +78,9 @@ const RequestItem = ({ location, parcels, setOpen, setSelectedParcel }) => {
 const RequestList = ({ parcels }) => {
   const [isOpen, setOpen] = useState(false);
   const [selectedParcel, setSelectedParcel] = useState(null);
-  const locations = parcels.map((parcel) => parcel.to);
+  const locations = [
+    ...new Set(parcels.map((parcel) => parcel.to.split(" ")[0])),
+  ].sort();
   return (
     <>
       <div style={{ display: "grid", rowGap: 12 }}>
@@ -104,8 +102,11 @@ const RequestList = ({ parcels }) => {
         ) : (
           locations.map((location) => (
             <RequestItem
+              key={location}
               location={location}
-              parcels={parcels}
+              parcels={parcels.filter(
+                (parcel) => parcel.to.split(" ")[0] === location
+              )}
               setOpen={setOpen}
               setSelectedParcel={setSelectedParcel}
             />

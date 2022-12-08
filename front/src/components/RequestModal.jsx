@@ -62,7 +62,7 @@ const RequestModal = ({ isOpen, setOpen, selectedParcel }) => {
           Select the Driver
         </div>
         {drivers.map((driver) => (
-          <DriverItem driver={driver} setOpen={setOpen} />
+          <DriverItem key={driver} driver={driver} setOpen={setOpen} />
         ))}
       </div>
     </div>
