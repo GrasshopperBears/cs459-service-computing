@@ -1,6 +1,7 @@
 import React from "react";
 
 const DetailInfo = ({ parcel }) => {
+  if (!parcel) return;
   return (
     <div
       style={{

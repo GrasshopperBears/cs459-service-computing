@@ -1,29 +1,41 @@
-import React, { useEffect } from "react";
-import randomLocation from "../static/locations";
+import React, { useEffect, useState } from "react";
+import { hubListAddress } from "../static/locations";
 
-const DetailInfo = () => {
+const DetailInfo = ({ parcel }) => {
+  const [randomLocation, setRandomLocation] = useState("");
+
   useEffect(() => {
-    const container = document.getElementById("map");
-    const options = {
-      center: new window.kakao.maps.LatLng(36.370447, 127.361253),
-      level: 6,
-    };
-    const map = new window.kakao.maps.Map(container, options);
+    if (!parcel) return;
+    const fromOrTo = Math.random() > 0.5 ? parcel.from : parcel.to;
+    const hubList = hubListAddress.find(
+      (region) => region.name === fromOrTo?.split(" ")[0]
+    ).list;
+    setRandomLocation(
+      hubList[Math.floor(hubList.length * Math.random())].address
+    );
+  }, [parcel]);
 
+  useEffect(() => {
+    if (!randomLocation) return;
+
+    const container = document.getElementById("map");
     const geocoder = new window.kakao.maps.services.Geocoder();
+
     geocoder.addressSearch(randomLocation, function (result, status) {
       if (status === window.kakao.maps.services.Status.OK) {
         const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
+        const map = new window.kakao.maps.Map(container, {
+          center: coords,
+          level: 6,
+        });
         const marker = new window.kakao.maps.Marker({
           position: coords,
         });
-        marker.setMap(map); // 마커가 지도 위에 표시되도록 설정합니다
-        map.setCenter(coords); // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        marker.setMap(map);
       }
     });
-  }, []);
+  }, [randomLocation]);
+
   return (
     <div
       style={{
