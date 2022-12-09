@@ -21,21 +21,36 @@ const DeliveryItem = ({ parcel }) => {
           borderRadius: 12,
           padding: "14px 16px",
           columnGap: 8,
+          width: "calc(100% - 32px)",
         }}
       >
-        <div style={{ flex: "1", fontSize: 16, fontWeight: 600 }}>
-          {parcel.commodity}
-        </div>
         <div
           style={{
             flex: "1",
-            fontSize: 10,
-            color: "var(--text-gray)",
-            textAlign: "right",
+            fontSize: 16,
+            fontWeight: 600,
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
           }}
         >
-          {parcel.to}
+          {parcel.commodity}
         </div>
+        {!isExpanded && (
+          <div
+            style={{
+              flex: "0.5 1",
+              fontSize: 10,
+              color: "var(--text-gray)",
+              textAlign: "right",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+            }}
+          >
+            {parcel.to.split(" ").splice(0, 3).join(" ")}
+          </div>
+        )}
         <div
           style={{
             borderRadius: 15,
@@ -64,8 +79,9 @@ const DeliveryItem = ({ parcel }) => {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            padding: "4px 14px 12px",
+            flexDirection: "column",
+            rowGap: 4,
+            padding: "0 14px 12px",
           }}
         >
           <div style={{ color: "var(--text-gray)", fontSize: 12 }}>
@@ -82,7 +98,7 @@ const DeliveryItem = ({ parcel }) => {
 
 const DeliveryList = ({ parcels }) => {
   return (
-    <div style={{ display: "grid", rowGap: 12 }}>
+    <div style={{ display: "flex", flexDirection: "column", rowGap: 12 }}>
       {!parcels.length ? (
         <div
           style={{
