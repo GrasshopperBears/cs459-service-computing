@@ -15,23 +15,20 @@ const RequestItem = ({ location, parcels, setOpen, setSelectedParcel }) => {
       }}
     >
       <div
+        onClick={() => setIsExpanded(!isExpanded)}
         style={{
           display: "flex",
           alignItems: "center",
           borderRadius: 12,
           padding: "14px 3px 14px 0",
-          columnGap: 8,
+          cursor: "pointer",
         }}
       >
         <div style={{ flex: "1", fontSize: 16, fontWeight: 600 }}>
           {location}
         </div>
         <Arrow
-          onClick={() => setIsExpanded(!isExpanded)}
-          style={{
-            cursor: "pointer",
-            transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-          }}
+          style={{ transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
         />
       </div>
       {isExpanded &&
@@ -43,24 +40,32 @@ const RequestItem = ({ location, parcels, setOpen, setSelectedParcel }) => {
               justifyContent: "space-between",
               alignItems: "center",
               padding: "10px 4px",
-              columnGap: 8,
               borderTop: !index ? "1px solid var(--border)" : "none",
+              height: 23,
             }}
           >
-            <div style={{ fontSize: 14, fontWeight: 600 }}>
-              {parcel.commodity}
-            </div>
             <div
               style={{
-                flex: "1",
-                color: "var(--text-gray)",
-                fontSize: 12,
-                wordBreak: "keep-all",
-                height: 17,
-                overflow: "hidden",
+                display: "flex",
+                alignItems: "baseline",
+                columnGap: 6,
               }}
             >
-              {parcel.from.split(" ").slice(0, 3).join(" ")}
+              <div style={{ fontSize: 14, fontWeight: 600 }}>
+                {parcel.commodity}
+              </div>
+              <div
+                style={{
+                  flex: "1",
+                  color: "var(--text-gray)",
+                  fontSize: 12,
+                  wordBreak: "keep-all",
+                  height: 17,
+                  overflow: "hidden",
+                }}
+              >
+                {parcel.from.split(" ").slice(0, 3).join(" ")}
+              </div>
             </div>
             <div style={{ color: "var(--text-gray)", fontSize: 12 }}>
               {parcel.deliveredBy ? parcel.deliveredBy + " 기사님" : null}
