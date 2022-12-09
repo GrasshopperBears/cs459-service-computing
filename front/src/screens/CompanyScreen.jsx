@@ -16,7 +16,7 @@ const CompanyScreen = () => {
   return (
     <>
       <Title title="Delivery Requests" />
-      <RequestList parcels={parcels} />
+      <RequestList parcels={parcels} setParcels={setParcels} />
       <div
         style={{
           paddingTop: "10px",
@@ -25,7 +25,7 @@ const CompanyScreen = () => {
           fontSize: 14,
         }}
       >
-        도착지 기준으로 분류
+        ( 도착지 기준으로 분류 )
       </div>
     </>
   );

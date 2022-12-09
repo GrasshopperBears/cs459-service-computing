@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const drivers = ["김넙죽", "이거위", "박냐옹", "최오리", "정너굴", "강백로"];
 
-const DriverItem = ({ driver, setOpen }) => {
+const DriverItem = ({ driver, setOpen, selectedParcel, setParcels }) => {
   const [isHover, setHover] = useState(false);
+  const fetchParcels = async () => {
+    const { data } = await axios.get("http://localhost:4000/delivery");
+    setParcels(data);
+  };
   return (
     <div
       style={{
@@ -12,7 +17,14 @@ const DriverItem = ({ driver, setOpen }) => {
         borderRadius: 4,
         cursor: "pointer",
       }}
-      onClick={() => setOpen(false)}
+      onClick={async () => {
+        const { status } = await axios.post("http://localhost:4000/assign", {
+          id: selectedParcel._id,
+          deliveredBy: driver,
+        });
+        if (status === 200) fetchParcels();
+        setOpen(false);
+      }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -21,7 +33,7 @@ const DriverItem = ({ driver, setOpen }) => {
   );
 };
 
-const RequestModal = ({ isOpen, setOpen, selectedParcel }) => {
+const RequestModal = ({ isOpen, setOpen, selectedParcel, setParcels }) => {
   return (
     <div
       style={{
@@ -62,7 +74,13 @@ const RequestModal = ({ isOpen, setOpen, selectedParcel }) => {
           Select the Driver
         </div>
         {drivers.map((driver) => (
-          <DriverItem key={driver} driver={driver} setOpen={setOpen} />
+          <DriverItem
+            key={driver}
+            driver={driver}
+            setOpen={setOpen}
+            selectedParcel={selectedParcel}
+            setParcels={setParcels}
+          />
         ))}
       </div>
     </div>

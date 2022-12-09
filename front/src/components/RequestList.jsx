@@ -37,6 +37,7 @@ const RequestItem = ({ location, parcels, setOpen, setSelectedParcel }) => {
       {isExpanded &&
         parcels.map((parcel, index) => (
           <div
+            key={index}
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -49,33 +50,47 @@ const RequestItem = ({ location, parcels, setOpen, setSelectedParcel }) => {
             <div style={{ fontSize: 14, fontWeight: 600 }}>
               {parcel.commodity}
             </div>
-            <div style={{ flex: "1", color: "var(--text-gray)", fontSize: 12 }}>
-              {parcel.from.split(" ").slice(0, 3).join(" ")}
-            </div>
             <div
               style={{
-                borderRadius: 15,
-                padding: "2.5px 10px 3.5px",
-                backgroundColor: "var(--blue)",
-                cursor: "pointer",
+                flex: "1",
+                color: "var(--text-gray)",
                 fontSize: 12,
-                color: "var(--white)",
-                fontWeight: 600,
-              }}
-              onClick={() => {
-                setSelectedParcel(parcel);
-                setOpen(true);
+                wordBreak: "keep-all",
+                height: 17,
+                overflow: "hidden",
               }}
             >
-              Assign
+              {parcel.from.split(" ").slice(0, 3).join(" ")}
             </div>
+            <div style={{ color: "var(--text-gray)", fontSize: 12 }}>
+              {parcel.deliveredBy ? parcel.deliveredBy + " 기사님" : null}
+            </div>
+            {!parcel.deliveredBy && (
+              <div
+                style={{
+                  borderRadius: 15,
+                  padding: "2.5px 10px 3.5px",
+                  backgroundColor: "var(--blue)",
+                  cursor: "pointer",
+                  fontSize: 12,
+                  color: "var(--white)",
+                  fontWeight: 600,
+                }}
+                onClick={() => {
+                  setSelectedParcel(parcel);
+                  setOpen(true);
+                }}
+              >
+                Assign
+              </div>
+            )}
           </div>
         ))}
     </div>
   );
 };
 
-const RequestList = ({ parcels }) => {
+const RequestList = ({ parcels, setParcels }) => {
   const [isOpen, setOpen] = useState(false);
   const [selectedParcel, setSelectedParcel] = useState(null);
   const locations = [
@@ -117,6 +132,7 @@ const RequestList = ({ parcels }) => {
         isOpen={isOpen}
         setOpen={setOpen}
         selectedParcel={selectedParcel}
+        setParcels={setParcels}
       />
     </>
   );
