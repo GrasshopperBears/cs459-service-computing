@@ -9,7 +9,7 @@ const DeliveryScreen = () => {
   useEffect(() => {
     const fetchParcels = async () => {
       const { data } = await axios.get("http://localhost:4000/delivery", {
-        deliveryMan: "김넙죽",
+        params: { deliveryMan: "김넙죽" },
       });
       setParcels(data);
     };
