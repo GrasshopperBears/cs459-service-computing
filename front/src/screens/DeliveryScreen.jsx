@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import Title from "../components/Title";
 import DeliveryList from "../components/DeliveryList";
-import parcelsMock from "../static/parcelsMock";
 
 const DeliveryScreen = () => {
+  const [parcels, setParcels] = useState([]);
+  useEffect(() => {
+    const fetchParcels = async () => {
+      const { data } = await axios.get("http://localhost:4000/delivery", {
+        deliveryMan: "김넙죽",
+      });
+      setParcels(data);
+    };
+    fetchParcels();
+  }, []);
   return (
     <>
       <Title title="Parcels to Delivery" />
-      <DeliveryList parcels={parcelsMock} />
+      <DeliveryList parcels={parcels} />
     </>
   );
 };
