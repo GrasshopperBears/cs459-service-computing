@@ -4,16 +4,19 @@ const getDeliveries = async (req, res) => {
   const { deliveryMan } = req.body;
 
   try {
-    const deliveries = await deliveryModel.find({ deliveredBy: deliveryMan }, [
-      "from",
-      "to",
-      "date",
-      "commodity",
-      "additionalInfo",
-      "deliveredBy",
-      "status",
-      "realDeliveryId",
-    ]);
+    const deliveries = await deliveryModel.find(
+      deliveryMan ? { deliveredBy: deliveryMan } : {},
+      [
+        "from",
+        "to",
+        "date",
+        "commodity",
+        "additionalInfo",
+        "deliveredBy",
+        "status",
+        "realDeliveryId",
+      ]
+    );
     res.json(deliveries);
   } catch (e) {
     res.status(500).json(e);
