@@ -4,7 +4,7 @@ import { ReactComponent as Arrow } from "../static/Arrow.svg";
 const DeliveryItem = ({ parcel }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isStarted, setStarted] = useState(false);
-  const isCompleted = parcel.status.includes("Complete");
+  const isCompleted = parcel.status.includes("complete");
   return (
     <div
       style={{
