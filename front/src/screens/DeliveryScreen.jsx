@@ -17,7 +17,23 @@ const DeliveryScreen = () => {
   }, []);
   return (
     <>
-      <Title title="Parcels to Delivery" />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+        }}
+      >
+        <Title title="Parcels to Delivery" />
+        <div
+          style={{
+            fontSize: 14,
+            color: "var(--text-gray)",
+          }}
+        >
+          Nup-Jook Kim
+        </div>
+      </div>
       <DeliveryList parcels={parcels} />
     </>
   );
