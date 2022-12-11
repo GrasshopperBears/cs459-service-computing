@@ -54,6 +54,23 @@ const assignDelivery = async (req, res) => {
   }
 };
 
+const startDelivery = async (req, res) => {
+  const { id } = req.body;
+
+  if (!id) return res.sendStatus(400);
+
+  try {
+    const delivery = await deliveryModel.findById(id);
+    if (!delivery) return res.sendStatus(404);
+
+    delivery.status = "start";
+    await delivery.save();
+    res.sendStatus(200);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
+
 const completeDelivery = async (req, res) => {
   const { id } = req.body;
 
@@ -75,5 +92,6 @@ module.exports = {
   getDeliveries,
   createDelivery,
   assignDelivery,
+  startDelivery,
   completeDelivery,
 };

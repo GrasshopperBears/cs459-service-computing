@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { ReactComponent as Arrow } from "../static/Arrow.svg";
 
-const DeliveryItem = ({ parcel }) => {
+const DeliveryItem = ({ parcel, fetchParcels }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isStarted, setStarted] = useState(false);
   const isCompleted = parcel.status.includes("complete");
+  const isStarted = parcel.status.includes("start");
   return (
     <div
       style={{
@@ -61,8 +62,14 @@ const DeliveryItem = ({ parcel }) => {
             color: "var(--white)",
             fontWeight: 600,
           }}
-          onClick={() => {
-            if (!isCompleted) setStarted(!isStarted);
+          onClick={async () => {
+            const { status } = await axios.post(
+              `http://localhost:4000/${isStarted ? "complete" : "start"}`,
+              {
+                id: parcel._id,
+              }
+            );
+            if (status === 200) fetchParcels();
           }}
         >
           {isCompleted ? "Completed" : isStarted ? "Complete" : "Start"}
@@ -96,7 +103,7 @@ const DeliveryItem = ({ parcel }) => {
   );
 };
 
-const DeliveryList = ({ parcels }) => {
+const DeliveryList = ({ parcels, fetchParcels }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column", rowGap: 12 }}>
       {!parcels.length ? (
@@ -115,7 +122,9 @@ const DeliveryList = ({ parcels }) => {
           No parcels found
         </div>
       ) : (
-        parcels.map((parcel) => <DeliveryItem parcel={parcel} />)
+        parcels.map((parcel) => (
+          <DeliveryItem parcel={parcel} fetchParcels={fetchParcels} />
+        ))
       )}
     </div>
   );

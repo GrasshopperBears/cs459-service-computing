@@ -41,7 +41,11 @@ const ParcelList = ({ parcels }) => {
                 style={{ flex: "1", fontSize: 12, color: "var(--text-gray)" }}
               >
                 {parcel.date} <br />
-                {parcel.status}
+                {parcel.status === "before"
+                  ? "배송 출발 전"
+                  : parcel.status === "start"
+                  ? "배송 중"
+                  : "배송 완료"}
               </div>
             </div>
           </Link>

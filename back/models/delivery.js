@@ -8,7 +8,7 @@ const deliverySchema = Schema({
   commodity: { type: String, required: true },
   additionalInfo: { type: String, required: true },
   deliveredBy: { type: String },
-  status: { type: String, default: "deliverStart" },
+  status: { type: String, default: "before" },
   realDeliveryId: { type: String },
 });
 
