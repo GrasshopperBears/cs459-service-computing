@@ -6,12 +6,14 @@ const DetailInfo = ({ parcel }) => {
 
   useEffect(() => {
     if (!parcel) return;
-    const fromOrTo = Math.random() > 0.5 ? parcel.from : parcel.to;
+    // const fromOrTo = Math.random() > 0.5 ? parcel.from : parcel.to;
+    const fromOrTo = parcel.from;
     const hubList = hubListAddress.find(
       (region) => region.name === fromOrTo?.split(" ")[0]
     ).list;
     setRandomLocation(
-      hubList[Math.floor(hubList.length * Math.random())].address
+      // hubList[Math.floor(hubList.length * Math.random())].address
+      hubList[0].address
     );
   }, [parcel]);
 
