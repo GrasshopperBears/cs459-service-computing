@@ -1,6 +1,6 @@
 import React from "react";
 
-const DetailInfo = ({ messages }) => {
+const DetailStatus = ({ messages }) => {
   return (
     <div
       style={{
@@ -12,23 +12,33 @@ const DetailInfo = ({ messages }) => {
         marginBottom: 16,
       }}
     >
-      {messages.map((message, index) => (
+      {!messages.length ? (
         <div
-          key={index}
           style={{
             padding: "16px 0",
-            borderTop: index ? "1px solid var(--border)" : undefined,
-            display: "flex",
-            justifyContent: "space-between",
           }}
         >
-          <div style={{ fontSize: 14 }}>{message.location}</div>
-          <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
-            {message.status}
-          </div>
+          <div style={{ fontSize: 14 }}>배송 출발 전</div>
         </div>
-      ))}
+      ) : (
+        messages.map((message, index) => (
+          <div
+            key={index}
+            style={{
+              padding: "16px 0",
+              borderTop: index ? "1px solid var(--border)" : undefined,
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ fontSize: 14 }}>{message.location}</div>
+            <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
+              {message.status}
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };
-export default DetailInfo;
+export default DetailStatus;
