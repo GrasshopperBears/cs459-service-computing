@@ -23,6 +23,7 @@ function App() {
           <Route path="/seller" element={<SellerScreen />} />
           <Route path="/buyer/:commodity" element={<DetailScreen />} />
           <Route path="/seller/:commodity" element={<DetailScreen />} />
+          <Route path="/company/:commodity" element={<DetailScreen />} />
           <Route path="/company" element={<CompanyScreen />} />
           <Route path="/delivery" element={<DeliveryScreen />} />
         </Routes>

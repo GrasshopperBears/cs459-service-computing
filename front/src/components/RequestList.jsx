@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ReactComponent as Arrow } from "../static/Arrow.svg";
 import RequestModal from "./RequestModal";
 
@@ -33,63 +34,70 @@ const RequestItem = ({ location, parcels, setOpen, setSelectedParcel }) => {
       </div>
       {isExpanded &&
         parcels.map((parcel, index) => (
-          <div
+          <Link
+            to={`/company/${parcel.commodity}`}
             key={index}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "10px 4px",
-              borderTop: !index ? "1px solid var(--border)" : "none",
-              height: 23,
-            }}
+            style={{ cursor: "default" }}
           >
             <div
+              key={index}
               style={{
                 display: "flex",
-                alignItems: "baseline",
-                columnGap: 6,
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "10px 4px",
+                borderTop: !index ? "1px solid var(--border)" : "none",
+                height: 23,
               }}
             >
-              <div style={{ fontSize: 14, fontWeight: 600 }}>
-                {parcel.commodity}
-              </div>
               <div
                 style={{
-                  flex: "1",
-                  color: "var(--text-gray)",
-                  fontSize: 12,
-                  wordBreak: "keep-all",
-                  height: 17,
-                  overflow: "hidden",
+                  display: "flex",
+                  alignItems: "baseline",
+                  columnGap: 6,
                 }}
               >
-                {parcel.from.split(" ").slice(0, 3).join(" ")}
+                <div style={{ fontSize: 14, fontWeight: 600 }}>
+                  {parcel.commodity}
+                </div>
+                <div
+                  style={{
+                    flex: "1",
+                    color: "var(--text-gray)",
+                    fontSize: 12,
+                    wordBreak: "keep-all",
+                    height: 17,
+                    overflow: "hidden",
+                  }}
+                >
+                  {parcel.from.split(" ").slice(0, 3).join(" ")}
+                </div>
               </div>
-            </div>
-            <div style={{ color: "var(--text-gray)", fontSize: 12 }}>
-              {parcel.deliveredBy ? parcel.deliveredBy + " 기사님" : null}
-            </div>
-            {!parcel.deliveredBy && (
-              <div
-                style={{
-                  borderRadius: 15,
-                  padding: "2.5px 10px 3.5px",
-                  backgroundColor: "var(--blue)",
-                  cursor: "pointer",
-                  fontSize: 12,
-                  color: "var(--white)",
-                  fontWeight: 600,
-                }}
-                onClick={() => {
-                  setSelectedParcel(parcel);
-                  setOpen(true);
-                }}
-              >
-                Assign
+              <div style={{ color: "var(--text-gray)", fontSize: 12 }}>
+                {parcel.deliveredBy ? parcel.deliveredBy + " 기사님" : null}
               </div>
-            )}
-          </div>
+              {!parcel.deliveredBy && (
+                <div
+                  style={{
+                    borderRadius: 15,
+                    padding: "2.5px 10px 3.5px",
+                    backgroundColor: "var(--blue)",
+                    cursor: "pointer",
+                    fontSize: 12,
+                    color: "var(--white)",
+                    fontWeight: 600,
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectedParcel(parcel);
+                    setOpen(true);
+                  }}
+                >
+                  Assign
+                </div>
+              )}
+            </div>
+          </Link>
         ))}
     </div>
   );
