@@ -1,4 +1,4 @@
-const { deliveryModel, userModel } = require("../models");
+const { deliveryModel, notificationModel } = require("../models");
 
 const getDeliveries = async (req, res) => {
   const { deliveryMan } = req.query;
@@ -65,6 +65,12 @@ const startDelivery = async (req, res) => {
 
     delivery.status = "start";
     await delivery.save();
+
+    await notificationModel.create({
+      type: "start",
+      description: `${delivery.commodity}의 배달이 시작되었습니다. (배송원: ${delivery.deliveredBy})`,
+    });
+
     res.sendStatus(200);
   } catch (e) {
     res.status(500).json(e);
@@ -82,6 +88,12 @@ const completeDelivery = async (req, res) => {
 
     delivery.status = "complete";
     await delivery.save();
+
+    await notificationModel.create({
+      type: "complete",
+      description: `${delivery.commodity}의 배달이 완료되었습니다.`,
+    });
+
     res.sendStatus(200);
   } catch (e) {
     res.status(500).json(e);
