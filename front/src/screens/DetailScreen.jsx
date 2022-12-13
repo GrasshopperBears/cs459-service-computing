@@ -37,6 +37,7 @@ const messages = (from, to) => [
 
 const DetailScreen = () => {
   const [parcel, setParcel] = useState(null);
+  const [logs, setLogs] = useState([]);
   const location = useLocation();
   useEffect(() => {
     const fetchParcel = async () => {
@@ -50,6 +51,16 @@ const DetailScreen = () => {
     };
     fetchParcel();
   }, [location.pathname]);
+  useEffect(() => {
+    const fetchLogs = async () => {
+      const { data } = await axios.get("http://localhost:4000/log", {
+        params: { deliveryId: parcel._id },
+      });
+      setLogs(data);
+    };
+    if (!parcel) return;
+    fetchLogs();
+  }, [parcel]);
 
   return (
     <>
@@ -63,11 +74,25 @@ const DetailScreen = () => {
             ? messages(parcel?.from, parcel?.to)
             : messages(parcel?.from, parcel?.to).slice(
                 0,
-                Math.ceil(Math.random() * 5 + 1)
+                Math.ceil(Math.random() * 4 + 1)
               )
         }
       />
-      <DetailLocation parcel={parcel} />
+      <div style={{ display: "flex", flexDirection: "column", rowGap: 16 }}>
+        {logs
+          .sort((a, b) => {
+            console.log(a.impact, b.impact);
+            return a.impact < b.impact ? 1 : -1;
+          })
+          .map((log, index) => (
+            <DetailLocation
+              key={index}
+              index={index}
+              parcel={parcel}
+              log={log}
+            />
+          ))}
+      </div>
     </>
   );
 };

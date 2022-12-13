@@ -1,29 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { hubListAddress } from "../static/locations";
+import React, { useEffect } from "react";
 
-const DetailLocation = ({ parcel }) => {
-  const [randomLocation, setRandomLocation] = useState("");
-
+const DetailLocation = ({ parcel, log, index }) => {
   useEffect(() => {
-    if (!parcel) return;
-    // const fromOrTo = Math.random() > 0.5 ? parcel.from : parcel.to;
-    const fromOrTo = parcel.from;
-    const hubList = hubListAddress.find(
-      (region) => region.name === fromOrTo?.split(" ")[0]
-    ).list;
-    setRandomLocation(
-      // hubList[Math.floor(hubList.length * Math.random())].address
-      hubList[0].address
-    );
-  }, [parcel]);
-
-  useEffect(() => {
-    if (!randomLocation) return;
-
-    const container = document.getElementById("map");
+    const container = document.getElementById(`map${index}`);
     const geocoder = new window.kakao.maps.services.Geocoder();
 
-    geocoder.addressSearch(randomLocation, function (result, status) {
+    geocoder.addressSearch(log.address, function (result, status) {
       if (status === window.kakao.maps.services.Status.OK) {
         const coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
         const map = new window.kakao.maps.Map(container, {
@@ -36,8 +18,8 @@ const DetailLocation = ({ parcel }) => {
         marker.setMap(map);
       }
     });
-  }, [randomLocation]);
-  if (!parcel?.deliveredBy) return;
+  }, [log.address, index]);
+  if (!parcel?.deliveredBy || !log) return;
   return (
     <div
       style={{
@@ -45,9 +27,13 @@ const DetailLocation = ({ parcel }) => {
         overflow: "hidden",
         position: "relative",
         border: "1px solid var(--border)",
+        zIndex: 0,
       }}
     >
-      <div id="map" style={{ width: "100%", height: 232 }} />
+      <div
+        id={`map${index}`}
+        style={{ width: "100%", height: 232, zIndex: -1 }}
+      />
       <div
         style={{
           display: "flex",
@@ -58,7 +44,7 @@ const DetailLocation = ({ parcel }) => {
       >
         <div style={{ fontSize: 14 }}>충격 감지</div>
         <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
-          {randomLocation}
+          {log.address}
         </div>
       </div>
       <div
@@ -70,12 +56,24 @@ const DetailLocation = ({ parcel }) => {
       >
         <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
           <b style={{ color: "var(--text)" }}>{parcel.deliveredBy} 기사님</b>{" "}
-          &nbsp;010-
-          {parseInt(parcel.deliveredBy.charCodeAt(0) / 10)}-
-          {parseInt(parcel.deliveredBy.charCodeAt(1) / 10)}
+          &nbsp;
+          <div
+            style={{
+              fontSize: "inherit",
+              color: "var(--blue)",
+              cursor: "pointer",
+              textDecoration: "underline",
+              display: "initial",
+            }}
+            onClick={() => alert("전화 연결 중입니다.")}
+          >
+            010-
+            {parseInt(parcel.deliveredBy.charCodeAt(0) / 10)}-
+            {parseInt(parcel.deliveredBy.charCodeAt(1) / 10)}
+          </div>
         </div>
         <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
-          충격량 : {(Math.random() * 60 + 20).toFixed(1)}(N)
+          충격량 : {log.impact}(N)
         </div>
       </div>
     </div>
