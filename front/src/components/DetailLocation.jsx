@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { hubListAddress } from "../static/locations";
 
-const DetailInfo = ({ parcel }) => {
+const DetailLocation = ({ parcel }) => {
   const [randomLocation, setRandomLocation] = useState("");
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const DetailInfo = ({ parcel }) => {
       }
     });
   }, [randomLocation]);
-
+  if (!parcel?.deliveredBy) return;
   return (
     <div
       style={{
@@ -69,10 +69,10 @@ const DetailInfo = ({ parcel }) => {
         }}
       >
         <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
-          <b style={{ color: "var(--text)" }}>{parcel?.deliveredBy} 기사님</b>{" "}
+          <b style={{ color: "var(--text)" }}>{parcel.deliveredBy} 기사님</b>{" "}
           &nbsp;010-
-          {parseInt(parcel?.deliveredBy.charCodeAt(0) / 10)}-
-          {parseInt(parcel?.deliveredBy.charCodeAt(1) / 10)}
+          {parseInt(parcel.deliveredBy.charCodeAt(0) / 10)}-
+          {parseInt(parcel.deliveredBy.charCodeAt(1) / 10)}
         </div>
         <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
           충격량 : {(Math.random() * 60 + 20).toFixed(1)}(N)
@@ -81,4 +81,4 @@ const DetailInfo = ({ parcel }) => {
     </div>
   );
 };
-export default DetailInfo;
+export default DetailLocation;

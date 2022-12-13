@@ -1,6 +1,7 @@
 import React from "react";
 
-const Notification = ({ messages }) => {
+const Notification = ({ notification }) => {
+  // console.log(notification[0].description.replace(". ", "\n"));
   return (
     <div
       style={{
@@ -11,18 +12,30 @@ const Notification = ({ messages }) => {
         borderRadius: 12,
       }}
     >
-      {messages.map((message, index) => (
+      {!notification ? (
         <div
-          key={index}
           style={{
             padding: "16px 0",
             fontSize: 14,
-            borderTop: index ? "1px solid var(--border)" : undefined,
           }}
         >
-          {message}
+          There are no notifications
         </div>
-      ))}
+      ) : (
+        notification.map((message, index) => (
+          <div
+            key={index}
+            style={{
+              padding: "16px 0",
+              fontSize: 14,
+              borderTop: index ? "1px solid var(--border)" : undefined,
+              whiteSpace: "break-spaces",
+            }}
+          >
+            {message.description.replace(". (", ".\n(")}
+          </div>
+        ))
+      )}
     </div>
   );
 };

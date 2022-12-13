@@ -13,19 +13,25 @@ const messages = [
 
 const BuyerScreen = () => {
   const [parcels, setParcels] = useState([]);
+  const [notification, setNotification] = useState([]);
+  const fetchParcels = async () => {
+    const { data } = await axios.get("http://localhost:4000/delivery");
+    setParcels(data);
+  };
+  const fetchNotification = async () => {
+    const { data } = await axios.get("http://localhost:4000/notification");
+    setNotification(data);
+  };
   useEffect(() => {
-    const fetchParcels = async () => {
-      const { data } = await axios.get("http://localhost:4000/delivery");
-      setParcels(data);
-    };
     fetchParcels();
+    fetchNotification();
   }, []);
   return (
     <>
       <Title title="Check you Parcels" />
       <ParcelList parcels={parcels} />
       <Title title="Notifications" />
-      <Notification messages={messages} />
+      <Notification notification={notification} />
     </>
   );
 };
