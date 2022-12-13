@@ -69,14 +69,10 @@ const DetailInfo = ({ parcel }) => {
         }}
       >
         <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
-          <b style={{ color: "var(--text)" }}>박냐옹 기사님</b> &nbsp;010-
-          {Math.ceil(Math.random() * 10000)
-            .toString()
-            .padStart(4, "0")}
-          -
-          {Math.ceil(Math.random() * 10000)
-            .toString()
-            .padStart(4, "0")}
+          <b style={{ color: "var(--text)" }}>{parcel?.deliveredBy} 기사님</b>{" "}
+          &nbsp;010-
+          {parseInt(parcel?.deliveredBy.charCodeAt(0) / 10)}-
+          {parseInt(parcel?.deliveredBy.charCodeAt(1) / 10)}
         </div>
         <div style={{ fontSize: 12, color: "var(--text-gray)" }}>
           충격량 : {(Math.random() * 60 + 20).toFixed(1)}(N)
