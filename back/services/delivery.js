@@ -1,11 +1,11 @@
 const { deliveryModel, notificationModel } = require("../models");
 
 const getDeliveries = async (req, res) => {
-  const { deliveryMan } = req.query;
+  const { deliveredBy } = req.query;
 
   try {
     const deliveries = await deliveryModel.find(
-      deliveryMan ? { deliveredBy: deliveryMan } : {},
+      deliveredBy ? { deliveredBy } : {},
       [
         "from",
         "to",

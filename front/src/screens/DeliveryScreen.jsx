@@ -8,7 +8,7 @@ const DeliveryScreen = () => {
   const [parcels, setParcels] = useState([]);
   const fetchParcels = async () => {
     const { data } = await axios.get("http://localhost:4000/delivery", {
-      params: { deliveryMan: "김넙죽" },
+      params: { deliveredBy: "김넙죽" },
     });
     setParcels(data);
   };
