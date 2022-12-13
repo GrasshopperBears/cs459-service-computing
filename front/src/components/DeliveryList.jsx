@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ReactComponent as Arrow } from "../static/Arrow.svg";
+import { hubListAddress } from "../static/locations";
 
 const DeliveryItem = ({ parcel, fetchParcels }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isCompleted = parcel.status.includes("complete");
   const isStarted = parcel.status.includes("start");
+  const addImpact = () => {
+    const fromOrTo = Math.random() > 0.5 ? parcel.from : parcel.to;
+    const hubList = hubListAddress.find(
+      (region) => region.name === fromOrTo?.split(" ")[0]
+    ).list;
+    const address = hubList[Math.floor(hubList.length * Math.random())].address;
+    axios.post("http://localhost:4000/log", {
+      deliveryId: parcel._id,
+      address: address,
+      impact: (Math.random() * 60 + 20).toFixed(1),
+    });
+  };
   return (
     <div
       style={{
@@ -94,6 +107,20 @@ const DeliveryItem = ({ parcel, fetchParcels }) => {
           <div style={{ color: "var(--text-gray)", fontSize: 12 }}>
             {parcel.to}
           </div>
+          {isStarted && (
+            <div
+              style={{
+                color: "var(--blue)",
+                fontSize: 12,
+                textAlign: "right",
+                cursor: "pointer",
+                marginTop: -21,
+              }}
+              onClick={addImpact}
+            >
+              Add Impact
+            </div>
+          )}
           <div style={{ color: "var(--text-gray)", fontSize: 12 }}>
             {parcel.additionalInfo}
           </div>
@@ -123,7 +150,11 @@ const DeliveryList = ({ parcels, fetchParcels }) => {
         </div>
       ) : (
         parcels.map((parcel) => (
-          <DeliveryItem parcel={parcel} fetchParcels={fetchParcels} />
+          <DeliveryItem
+            key={parcel.commodity}
+            parcel={parcel}
+            fetchParcels={fetchParcels}
+          />
         ))
       )}
     </div>
